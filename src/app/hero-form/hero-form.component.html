@@ -1,0 +1,56 @@
+<div class="container">
+    <div>
+        <h1>Hero Form</h1>
+        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+        
+            <div class="form-group">
+                <label for="name"><strong>Name</strong></label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    required 
+                    [(ngModel)]="model.name"
+                    #name="ngModel"
+                >
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    the name is required !
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="alterEgo"><strong> Alter Ego </strong> </label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="alterEgo"
+                    id="alterEgo"
+                    [(ngModel)]="model.alterEgo"
+                    
+                >
+                
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="power"><strong>Hero Power</strong></label>
+                <select required 
+                    id="power" 
+                    class="form-control" 
+                    [(ngModel)]="model.power" 
+                    name="power" 
+                    #power="ngModel"
+                >
+                    <option *ngFor="let pow of powers" [value]="pow" > {{ pow }} </option>
+                </select>
+                <div [hidden]="power.valid || power.pristine" ></div>
+            </div>
+            <br> 
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="newHero(); heroForm.reset()" [disabled]="!heroForm.form.valid" >New Hero</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
